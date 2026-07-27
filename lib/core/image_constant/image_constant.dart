@@ -1,0 +1,30 @@
+class ImageConstant {
+  static const String path = 'assets/images/png/';
+  static const String onBoardingOne = "${path}onboarding_one.png";
+  static const String onBoardingTwo = "${path}onboarding_two.png";
+  static const String nextArrowIcon = "${path}next_arrow_icon.png";
+  static const String welcomeImg = "${path}welcome_img.png";
+  static const String appLogo = "${path}app_logo.png";
+  static const String passwordHideIcon = "${path}password_hide_icon.png";
+  static const String passwordUnHideIcon = "${path}password_unhide_icon.png";
+  static const String emailIcon = "${path}email_icon.png";
+  static const String lockIcon = "${path}lock_icon.png";
+  static const String userIcon = "${path}user_icon.png";
+  static const String doctorIcon = "${path}doctor_icon.png";
+  static const String wellnessCentreIcon = "${path}wellness_centre_icon.png";
+  static const String doctorImg = "${path}doctor_icon.png";
+  static const String wellnessCentreImg = "${path}wellness_centre_icon.png";
+  static const String userImg = "${path}user_icon.png";
+  static const String resortImg = "${path}resort_img.png";
+  static const String enquiriesSelectedIcon = "${path}enquiries_selected_icon.png";
+  static const String enquiriesUnSelectedIcon = "${path}enquiries_unselected_icon.png";
+  static const String homeSelectedIcon = "${path}home_selected_icon.png";
+  static const String homeUnSelectedIcon = "${path}home_unselected_icon.png";
+  static const String myJourneySelectedIcon = "${path}my_journey_selected_icon.png";
+  static const String myJourneyUnSelectedIcon = "${path}my_journey_unselected_icon.png";
+  static const String settingSelectedIcon = "${path}setting_selected_icon.png";
+  static const String settingUnSelectedIcon = "${path}settings_unselected_icon.png";
+  static const String heartIcon = "${path}heart_icon.png";
+  static const String sendMessageIcon = "${path}send_message_icon.png";
+  static const String imageNotFound = "${path}image_not_found.jpg";
+}
