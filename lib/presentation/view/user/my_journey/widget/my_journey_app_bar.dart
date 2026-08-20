@@ -12,7 +12,7 @@ class MyJourneyAppBar extends StatelessWidget {
       children: [
         const CommonAppBar(title: 'My Journeys', showBackButton: false),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 11.0),
           child: Text(
             'Track your wellness journeys, past and present.',
             style: TextStyle(

@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/presentation/model/common/doc_model.dart';
-
-class _ParticipantItem {
-  final String name;
-  final String age;
-  final String gender;
-  final String id;
-
-  _ParticipantItem({
-    required this.name,
-    required this.age,
-    required this.gender,
-    required this.id,
-  });
-}
+import 'package:healing/presentation/model/common/guests_model.dart';
 
 class DetailParticipantsCard extends StatelessWidget {
   final DocModel detailData;
@@ -23,31 +10,14 @@ class DetailParticipantsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<_ParticipantItem> participants = [];
     
-    if (detailData.guests != null && detailData.guests!.isNotEmpty) {
-      for (var guest in detailData.guests!) {
-        participants.add(_ParticipantItem(
-          name: guest.fullName ?? 'Guest',
-          age: guest.age != null ? '${guest.age} YRS' : 'N/A',
-          gender: (guest.gender ?? 'MALE').toUpperCase(),
-          id: guest.id != null ? '#${guest.id}' : '',
-        ));
-      }
-    } else {
-      participants.add(_ParticipantItem(
-        name: detailData.user?.name ?? detailData.user?.email ?? 'Self',
-        age: detailData.user?.age != null ? '${detailData.user!.age} YRS' : 'N/A',
-        gender: (detailData.user?.gender ?? 'MALE').toUpperCase(),
-        id: detailData.userId != null ? '#${detailData.userId}' : '',
-      ));
-    }
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'PARTICIPANTS (${participants.length})',
+          'PARTICIPANTS (${(detailData.enquiries?.guestDetails ??[]).length})',
           style: TextStyle(
             fontFamily: 'Afacad',
             fontSize: 11,
@@ -59,7 +29,7 @@ class DetailParticipantsCard extends StatelessWidget {
         const SizedBox(height: 10),
 
         // Loop through participants
-        ...participants.map((participant) {
+        ...(detailData.enquiries?.guestDetails ??[]).map((participant) {
           return Container(
             margin: const EdgeInsets.only(bottom: 12.0),
             padding: const EdgeInsets.all(16.0),
@@ -101,7 +71,7 @@ class DetailParticipantsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        participant.name,
+                        participant.name ??'',
                         style: const TextStyle(
                           fontFamily: 'Afacad',
                           fontSize: 16,
@@ -123,7 +93,7 @@ class DetailParticipantsCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              participant.age,
+                             participant.age.toString(),
                               style: const TextStyle(
                                 fontFamily: 'Afacad',
                                 fontSize: 10,
@@ -149,7 +119,7 @@ class DetailParticipantsCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              participant.gender,
+                              participant.gender ??'',
                               style: const TextStyle(
                                 fontFamily: 'Afacad',
                                 fontSize: 10,
@@ -164,47 +134,7 @@ class DetailParticipantsCard extends StatelessWidget {
                   ),
                 ),
 
-                // ID Badge on Right
-                if (participant.id.isNotEmpty)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'ID',
-                        style: TextStyle(
-                          fontFamily: 'Afacad',
-                          fontSize: 9,
-                          fontWeight: FontWeight.w700,
-                          color: ColorConstant.appColor,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFECFDF3),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: const Color(0xFFD0F5E0),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          participant.id,
-                          style: const TextStyle(
-                            fontFamily: 'Afacad',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: ColorConstant.appColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+
               ],
             ),
           );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healing/common/common_methods.dart';
-import 'package:healing/controller/book_program_controller.dart';
+import 'package:healing/controller/usercontroller/book_program_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 
 class ReviewBookingPriceBreakdownCard extends StatelessWidget {

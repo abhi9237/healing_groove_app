@@ -55,4 +55,27 @@ class MyJourneyRepository {
       rethrow;
     }
   }
+
+  Future<Response> genRateInvoice(int bookingId) async {
+    log('MyJourneyRepository: Endpoint is ${ApiConstant.genRateInvoice}');
+
+    try {
+      final response = await _apiCall.getRequest(
+        endPoint: '${ApiConstant.genRateInvoice}$bookingId',
+        token: HiveStorageService.getUserToken(),
+        options: Options(responseType: ResponseType.bytes),
+        extraHeaders: {
+          "Accept": "application/pdf",
+        },
+      );
+
+      log(
+        'MyJourneyRepository: genRateInvoice API call returned status code: ${response.statusCode}',
+      );
+      return response;
+    } catch (error) {
+      log('MyJourneyRepository: genRateInvoice API call failed with error: $error');
+      rethrow;
+    }
+  }
 }

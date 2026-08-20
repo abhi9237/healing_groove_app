@@ -5,7 +5,7 @@ import 'package:healing/presentation/view/user/cancel_booking/widget/cancel_book
 import 'package:healing/presentation/view/user/cancel_booking/widget/cancel_booking_refund_widget.dart';
 import 'package:healing/presentation/view/user/cancel_booking/widget/cancel_booking_status_widget.dart';
 import 'package:healing/presentation/view/user/cancel_booking/widget/cancel_booking_shimmer.dart';
-import '../../../../controller/cancel_booking_controller.dart';
+import '../../../../controller/usercontroller/cancel_booking_controller.dart';
 import 'widget/cancel_booking_app_bar.dart';
 
 class CancelBooking extends StatelessWidget {

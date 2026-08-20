@@ -13,20 +13,21 @@ class DetailRequirementsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String enquiryType = detailData.speciality ?? detailData.sourceType ?? 'Consultation';
-    final String selectedPackage = detailData.package?.name ?? 'My Custom Wellness Plan';
+    final String selectedPackage = detailData.enquiries?.wellnessGoals?.first ?? 'My Custom Wellness Plan';
 
     String startDate = '';
-    if (detailData.startDate != null) {
+    if (detailData.enquiries?.preferredDate != null) {
       try {
-        final date = DateTime.parse(detailData.startDate!).toLocal();
+        final date = DateTime.parse(detailData.enquiries?.preferredDate ??'').toLocal();
         startDate = f.DateFormat('d/M/yyyy').format(date);
       } catch (e) {
-        startDate = detailData.startDate!;
+        startDate = detailData.enquiries?.preferredDate ??'';
       }
     }
 
     final String startTime = detailData.slotTime?.toString() ?? '10:00 AM';
     final String duration = detailData.package?.duration != null ? '${detailData.package!.duration} days' : '1 day';
+    final String description = detailData.enquiries?.concern ??'' ;
 
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -121,7 +122,6 @@ class DetailRequirementsCard extends StatelessWidget {
                           Text(
                             selectedPackage,
                             style: const TextStyle(
-                              fontFamily: 'Afacad',
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -154,7 +154,6 @@ class DetailRequirementsCard extends StatelessWidget {
                           Text(
                             'START DATE',
                             style: TextStyle(
-                              fontFamily: 'Afacad',
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
                               color: Colors.grey.shade500,
@@ -173,7 +172,6 @@ class DetailRequirementsCard extends StatelessWidget {
                               Text(
                                 startDate,
                                 style: const TextStyle(
-                                  fontFamily: 'Afacad',
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
                                   color: ColorConstant.lightBlackColor,
@@ -201,7 +199,6 @@ class DetailRequirementsCard extends StatelessWidget {
                           Text(
                             'START TIME',
                             style: TextStyle(
-                              fontFamily: 'Afacad',
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
                               color: Colors.grey.shade500,
@@ -220,7 +217,6 @@ class DetailRequirementsCard extends StatelessWidget {
                               Text(
                                 startTime,
                                 style: const TextStyle(
-                                  fontFamily: 'Afacad',
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
                                   color: ColorConstant.lightBlackColor,
@@ -269,7 +265,6 @@ class DetailRequirementsCard extends StatelessWidget {
                     const Text(
                       'DURATION',
                       style: TextStyle(
-                        fontFamily: 'Afacad',
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
                         color: ColorConstant.greyColor,
@@ -279,13 +274,30 @@ class DetailRequirementsCard extends StatelessWidget {
                     Text(
                       duration,
                       style: const TextStyle(
-                        fontFamily: 'Afacad',
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
                         color: ColorConstant.lightBlackColor,
                       ),
                     ),
                   ],
+                ),
+              ),
+              SizedBox(height: 15,),
+              Text(
+                'Description',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: ColorConstant.lightBlackColor,
+                ),
+              ),
+              SizedBox(height: 5,),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: ColorConstant.lightBlackColor,
                 ),
               ),
             ],

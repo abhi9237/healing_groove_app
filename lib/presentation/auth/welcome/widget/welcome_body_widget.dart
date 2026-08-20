@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:healing/common/common_button.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
-import '../../../../controller/onBoarding_controller.dart';
+import '../../../../controller/usercontroller/onBoarding_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 class WelcomeBodyWidget extends StatelessWidget {

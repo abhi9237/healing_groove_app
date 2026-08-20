@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/account_progress_controller.dart';
+import '../controller/usercontroller/account_progress_controller.dart';
 import '../core/color_constant/color_constant.dart';
-
 
 class AccountProgressBar extends StatelessWidget {
   final bool? isShowBackButton;
@@ -33,21 +32,22 @@ class AccountProgressBar extends StatelessWidget {
         child: Row(
           children: [
             // Back button
-            if (isShowBackButton == true)
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: ColorConstant.lightBlackColor,
-                    size: 26,
-                  ),
-                ),
-              ),
+            isShowBackButton == true
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: ColorConstant.lightBlackColor,
+                        size: 26,
+                      ),
+                    ),
+                  )
+                : SizedBox(width: 20),
             const SizedBox(width: 8),
 
             // Stepper
@@ -127,7 +127,8 @@ class AccountProgressBar extends StatelessWidget {
     bool isActive = false,
     String? number,
     required String label,
-  }) {
+  })
+  {
     Color circleColor;
     Color textColor;
     Widget child;
@@ -188,4 +189,5 @@ class AccountProgressBar extends StatelessWidget {
       ],
     );
   }
+
 }

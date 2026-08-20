@@ -3,7 +3,7 @@ import 'package:healing/common/common_button.dart';
 import 'package:healing/common/common_text_form_filled.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
-import '../../../../controller/forgot_password_controller.dart';
+import '../../../../controller/usercontroller/forgot_password_controller.dart';
 
 class ForgotPasswordBodyWidget extends StatelessWidget {
   final ForgotPasswordController controller;
@@ -36,7 +36,7 @@ class ForgotPasswordBodyWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             CommonButton(
-              height: 60,
+              height: 55,
               buttonText: 'Send OTP',
               fontWeight: FontWeight.bold,
               borderRadius: 20,
@@ -51,15 +51,55 @@ class ForgotPasswordBodyWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             CommonButton(
-              height: 60,
+              height: 55,
               buttonText: 'Verify OTP',
               fontWeight: FontWeight.bold,
               borderRadius: 20,
               onTap: () => controller.verifyOtp(context),
             ),
+            const SizedBox(height: 12),
+            if (controller.timerSeconds > 0)
+              Text(
+                "Resend code in 0:${controller.timerSeconds.toString().padLeft(2, '0')}",
+                style: const TextStyle(
+                  fontFamily: 'Afacad',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: ColorConstant.greyColor,
+                ),
+              )
+            else
+              InkWell(
+                onTap: () => controller.sendOtp(context),
+                borderRadius: BorderRadius.circular(8),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.sync_rounded,
+                        color: ColorConstant.appColor,
+                        size: 18,
+                      ),
+                      SizedBox(width: 6),
+                      Text(
+                        'Resend OTP',
+                        style: TextStyle(
+                          color: ColorConstant.appColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
           ] else if (controller.stepIndex == 2) ...[
             // Step 2: Three text fields: Email, New Password, Confirm Password
             CommonTextFormFilled(
+              readOnly: true,
               controller: controller.emailController,
               hintText: 'Email Address',
               prefixIcon: ImageConstant.emailIcon,
@@ -80,7 +120,7 @@ class ForgotPasswordBodyWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             CommonButton(
-              height: 60,
+              height: 55,
               buttonText: 'Submit',
               fontWeight: FontWeight.bold,
               borderRadius: 20,

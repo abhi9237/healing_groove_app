@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:healing/common/common_app_bar.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/settings_controller.dart';
+import 'package:healing/controller/usercontroller/settings_controller.dart';
 import 'widget/settings_profile_card.dart';
 import 'widget/settings_account_options.dart';
 import 'widget/settings_notifications_card.dart';
@@ -24,7 +24,13 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonAppBar(title: 'Settings', showBackButton: false),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: const CommonAppBar(
+                    title: 'Settings',
+                    showBackButton: false,
+                  ),
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -51,16 +57,14 @@ class SettingsScreen extends StatelessWidget {
                         const SizedBox(height: 16),
 
                         const SettingsAccountOptions(),
-                        const SizedBox(height: 12),
-                        const SettingsNotificationsCard(),
+                        // const SizedBox(height: 12),
+                        // const SettingsNotificationsCard(),
                         const SizedBox(height: 12),
 
                         const SettingsPrivacyCard(),
                         const SizedBox(height: 8),
 
-                         SettingsLogoutButton(
-                          controller: controller,
-                        ),
+                        SettingsLogoutButton(controller: controller),
 
                         // Space at bottom of list
                         const SizedBox(height: 120),
@@ -71,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           );
-        }
+        },
       ),
     );
   }

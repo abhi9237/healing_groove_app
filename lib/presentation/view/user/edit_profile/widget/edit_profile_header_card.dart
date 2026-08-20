@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/edit_profile_controller.dart';
+import 'package:healing/controller/usercontroller/edit_profile_controller.dart';
 
 class EditProfileHeaderCard extends StatelessWidget {
   final EditProfileController controller;
@@ -72,33 +72,33 @@ class EditProfileHeaderCard extends StatelessWidget {
                         child: const CircleAvatar(
                           radius: 44,
                           backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop',
+                            'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
                           ),
                         ),
                       ),
-                      Positioned(
-                        right: 2,
-                        bottom: 2,
-                        child: Container(
-                          width: 26,
-                          height: 26,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0C5C36), // Deep green
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1.5,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.edit_rounded,
-                              color: Colors.white,
-                              size: 13,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Positioned(
+                      //   right: 2,
+                      //   bottom: 2,
+                      //   child: Container(
+                      //     width: 26,
+                      //     height: 26,
+                      //     decoration: BoxDecoration(
+                      //       color: const Color(0xFF0C5C36), // Deep green
+                      //       shape: BoxShape.circle,
+                      //       border: Border.all(
+                      //         color: Colors.white,
+                      //         width: 1.5,
+                      //       ),
+                      //     ),
+                      //     child: const Center(
+                      //       child: Icon(
+                      //         Icons.edit_rounded,
+                      //         color: Colors.white,
+                      //         size: 13,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   const SizedBox(height: 10),

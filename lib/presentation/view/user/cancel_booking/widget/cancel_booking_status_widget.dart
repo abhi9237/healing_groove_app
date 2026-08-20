@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/color_constant/color_constant.dart';
-import 'package:healing/controller/cancel_booking_controller.dart';
+import 'package:healing/controller/usercontroller/cancel_booking_controller.dart';
 
 class CancelBookingStatusWidget extends StatelessWidget {
   final CancelBookingController controller;

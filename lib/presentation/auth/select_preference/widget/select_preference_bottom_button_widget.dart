@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../common/common_button.dart';
-import '../../../../controller/create_account_controller.dart';
+import '../../../../controller/usercontroller/create_account_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 class SelectPreferenceBottomButtonWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class SelectPreferenceBottomButtonWidget extends StatelessWidget {
               Navigator.maybePop(context);
             },
             child: Container(
-              height: 60,
+              height: 55,
               decoration: BoxDecoration(
                 color: ColorConstant.whiteColor,
                 borderRadius: BorderRadius.circular(22),
@@ -52,7 +52,7 @@ class SelectPreferenceBottomButtonWidget extends StatelessWidget {
         Expanded(
           flex: 3,
           child: CommonButton(
-            height: 60,
+            height: 55,
             buttonText: 'Lets Start',
             fontWeight: FontWeight.bold,
             borderRadius: 22,

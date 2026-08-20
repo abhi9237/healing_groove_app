@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healing/common/common_widget.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/edit_profile_controller.dart';
+import 'package:healing/controller/usercontroller/edit_profile_controller.dart';
 
 import '../../../../auth/select_preference/widget/preference_chip.dart';
 
@@ -133,7 +133,7 @@ class EditWellnessGoalsCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Update Preferences button (Outlined Green)
-          controller.isLoadingPreferences.value ? CommonCircularIndicator():
+          controller.isLoadingSaveChanges.value ? CommonCircularIndicator():
           SizedBox(
             width: double.infinity,
             height: 48,

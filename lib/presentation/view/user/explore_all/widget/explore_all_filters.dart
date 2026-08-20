@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/user_home_controller.dart';
+import 'package:healing/controller/usercontroller/explore_all_controller.dart';
 
 class ExploreAllFilters extends StatelessWidget {
-  final UserHomeController controller;
+  final ExploreAllController controller;
   const ExploreAllFilters({super.key, required this.controller});
 
   @override
@@ -55,38 +56,45 @@ class ExploreAllFilters extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Row(
-            children: [
-              // Pill 1: Verified Only
-              _buildFilterPill(
-                label: 'Verified Only',
-                isSelected: controller.isVerifiedOnly,
-                showCheck: true,
-                onTap: () => controller.toggleVerifiedOnly(),
-              ),
-              const SizedBox(width: 10),
+          child: Obx(() {
+            final services = controller.uniqueServiceNames;
+            return Row(
+              children: [
+                // Pill 1: Verified Only
+                _buildFilterPill(
+                  label: 'Verified Only',
+                  isSelected: controller.isVerifiedOnly.value,
+                  showCheck: true,
+                  onTap: () => controller.toggleVerifiedOnly(),
+                ),
+                const SizedBox(width: 10),
 
-              // Pill 2: Available Now
-              _buildFilterPill(
-                label: 'Available Now',
-                isSelected: controller.isAvailableNow,
-                showCheck: false,
-                onTap: () => controller.toggleAvailableNow(),
-                isGreyStyle: true,
-              ),
-              const SizedBox(width: 10),
-
-              // Pill 3: Panchakarma
-              _buildFilterPill(
-                label: 'Panchakarma',
-                isSelected: controller.isPanchakarmaSelected,
-                showCheck: false,
-                onTap: () => controller.togglePanchakarma(),
-                isBorderedStyle: true,
-              ),
-              const SizedBox(width: 16),
-            ],
-          ),
+                // Pill 2: Available Now
+                _buildFilterPill(
+                  label: 'Available Now',
+                  isSelected: controller.isAvailableNow.value,
+                  showCheck: false,
+                  onTap: () => controller.toggleAvailableNow(),
+                  isGreyStyle: true,
+                ),
+                
+                ...services.map((serviceName) {
+                  final isSelected = controller.selectedServices.contains(serviceName);
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: _buildFilterPill(
+                      label: serviceName,
+                      isSelected: isSelected,
+                      showCheck: false,
+                      onTap: () => controller.toggleServiceFilter(serviceName),
+                      isBorderedStyle: true,
+                    ),
+                  );
+                }),
+                const SizedBox(width: 16),
+              ],
+            );
+          }),
         ),
       ],
     );
@@ -100,7 +108,6 @@ class ExploreAllFilters extends StatelessWidget {
     bool isGreyStyle = false,
     bool isBorderedStyle = false,
   }) {
-    // Determine colors based on selection and style
     Color bgColor;
     Color textColor;
     Border? border;

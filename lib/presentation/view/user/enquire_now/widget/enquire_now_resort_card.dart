@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:custom_image_view/custom_image_view.dart';
+import 'package:healing/common/common_methods.dart';
+import 'package:healing/controller/usercontroller/enquire_now_controller.dart';
 import '../../../../../core/color_constant/color_constant.dart';
 import '../../../../../core/image_constant/image_constant.dart';
 
 class EnquireNowResortCard extends StatelessWidget {
-  const EnquireNowResortCard({super.key});
+  final EnquireNowController controller;
+
+  const EnquireNowResortCard({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +36,26 @@ class EnquireNowResortCard extends StatelessWidget {
           // Resort Image
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              ImageConstant.resortImg,
-              width: 75,
-              height: 75,
-              fit: BoxFit.cover,
-            ),
+            child: controller.centerDetail?.image?.url != null &&
+                    controller.centerDetail!.image!.url!.isNotEmpty
+                ? CustomImageView(
+                    url: controller.centerDetail!.image!.url!,
+                    width: 75,
+                    height: 75,
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => Image.asset(
+                      ImageConstant.resortImg,
+                      width: 75,
+                      height: 75,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Image.asset(
+                    ImageConstant.resortImg,
+                    width: 75,
+                    height: 75,
+                    fit: BoxFit.cover,
+                  ),
           ),
           const SizedBox(width: 16),
           
@@ -52,9 +74,9 @@ class EnquireNowResortCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Serenity Wellness Center',
-                  style: TextStyle(
+                Text(
+                  controller.centerDetail?.name ?? 'Serenity Wellness Center',
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: ColorConstant.lightBlackColor,
@@ -71,7 +93,13 @@ class EnquireNowResortCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Kerala, India',
+                      controller.centerDetail != null
+                          ? getLocation(
+                              city: controller.centerDetail?.location?.city,
+                              country: controller.centerDetail?.location?.country,
+                              state: controller.centerDetail?.location?.state,
+                            )
+                          : 'Kerala, India',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,

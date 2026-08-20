@@ -8,7 +8,8 @@ import '../../service/network/api_service.dart';
 class SettingsRepository {
   final ApiCall _apiCall = ApiCall();
 
-  Future<Response> logout() async {
+  Future<Response> logout() async
+  {
     log('AuthRepository: Endpoint is ${ApiConstant.logout}');
 
     try {
@@ -119,7 +120,8 @@ class SettingsRepository {
     }
   }
 
-  Future<Response> getSavedCentres() async {
+  Future<Response> getSavedCentres() async
+  {
     log('SettingsRepository: Endpoint is ${ApiConstant.getSaveCentre}');
 
     try {
@@ -140,4 +142,32 @@ class SettingsRepository {
       rethrow;
     }
   }
+
+  Future<Response> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    log('SettingsRepository: Endpoint is ${ApiConstant.changePassword}');
+
+    try {
+      final response = await _apiCall.postRequest(
+        endPoint: ApiConstant.changePassword,
+        token: HiveStorageService.getUserToken(),
+        data: {
+          'currentPassword': oldPassword,
+          'newPassword': newPassword,
+        },
+      );
+
+      log(
+        'SettingsRepository: Change Password API call returned with status code: ${response.statusCode}',
+      );
+      log('SettingsRepository: Response data: ${response.data}');
+      return response;
+    } catch (error) {
+      log('SettingsRepository: Change Password API call failed with error: $error');
+      rethrow;
+    }
+  }
+
 }

@@ -4,7 +4,7 @@ import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/presentation/auth/select_preference/widget/select_preference_bottom_button_widget.dart';
 import '../../../common/account_progress_bar.dart';
-import '../../../controller/create_account_controller.dart';
+import '../../../controller/usercontroller/create_account_controller.dart';
 import 'widget/select_preference_form.dart';
 import 'widget/select_preference_header.dart';
 

@@ -4,7 +4,7 @@ import 'package:healing/presentation/model/common/doc_model.dart';
 import 'package:healing/common/common_methods.dart';
 import 'package:intl/intl.dart' as f;
 import '../../../../../core/color_constant/color_constant.dart';
-import 'package:healing/controller/my_journey_controller.dart';
+import 'package:healing/controller/usercontroller/my_journey_controller.dart';
 
 class MyJourneyCard extends StatelessWidget {
   final DocModel booking;

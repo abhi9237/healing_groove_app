@@ -16,7 +16,9 @@ DocModel _$DocModelFromJson(Map<String, dynamic> json) => DocModel(
       .toList(),
   country: json['country'] as String?,
   role: json['role'] as String?,
-  managedBy: json['managedBy'],
+  managedBy: json['managedBy'] == null
+      ? null
+      : ManagedBy.fromJson(json['managedBy'] as Map<String, dynamic>),
   status: json['status'] as String?,
   onboardingCompleted: json['onboardingCompleted'] as bool?,
   dateOfBirth: json['dateOfBirth'],
@@ -52,10 +54,14 @@ DocModel _$DocModelFromJson(Map<String, dynamic> json) => DocModel(
       ?.map((e) => SessionModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   reviewCount: (json['reviewCount'] as num?)?.toInt(),
+  packages: (json['packages'] as List<dynamic>?)
+      ?.map((e) => PackagesModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
   minPrice: (json['minPrice'] as num?)?.toInt(),
   durationText: json['durationText'] as String?,
   speciality: json['speciality'] as String?,
   availability: json['availability'] as String?,
+  hasConsultation: json['hasConsultation'] as bool?,
   gallery: (json['gallery'] as List<dynamic>?)
       ?.map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
       .toList(),
@@ -89,7 +95,9 @@ DocModel _$DocModelFromJson(Map<String, dynamic> json) => DocModel(
       : PackagesModel.fromJson(json['package'] as Map<String, dynamic>),
   startDate: json['startDate'] as String?,
   slotTime: json['slotTime'],
-  assignedDoctor: json['assignedDoctor'] as List<dynamic>?,
+  assignedDoctor: (json['assignedDoctor'] as List<dynamic>?)
+      ?.map((e) => AssignedDoctor.fromJson(e as Map<String, dynamic>))
+      .toList(),
   groupSize: (json['groupSize'] as num?)?.toInt(),
   guests: (json['guests'] as List<dynamic>?)
       ?.map((e) => GuestsModel.fromJson(e as Map<String, dynamic>))
@@ -118,10 +126,42 @@ DocModel _$DocModelFromJson(Map<String, dynamic> json) => DocModel(
   refundInitiatedAt: json['refundInitiatedAt'],
   razorpayRefundId: json['razorpayRefundId'],
   refundProcessedAt: json['refundProcessedAt'],
+  enquiries: json['enquiries'] == null
+      ? null
+      : EnquiriesModel.fromJson(json['enquiries'] as Map<String, dynamic>),
+  url: json['url'] as String?,
+  filename: json['filename'] as String?,
+  mimeType: json['mimeType'] as String?,
+  filesize: (json['filesize'] as num?)?.toInt(),
+  width: (json['width'] as num?)?.toInt(),
+  height: (json['height'] as num?)?.toInt(),
+  services: (json['services'] as List<dynamic>?)
+      ?.map((e) => ServiceModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  doctors: (json['doctors'] as List<dynamic>?)
+      ?.map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  basePrice: (json['basePrice'] as num?)?.toInt(),
+  isActive: json['isActive'] as bool?,
+  price: (json['price'] as num?)?.toInt(),
+  duration: (json['duration'] as num?)?.toInt(),
+  minGuests: (json['minGuests'] as num?)?.toInt(),
+  maxGuests: (json['maxGuests'] as num?)?.toInt(),
+  availableDates: (json['availableDates'] as List<dynamic>?)
+      ?.map((e) => AvailableDatesModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  bookingNumber: json['bookingNumber'] as String?,
 );
 
 Map<String, dynamic> _$DocModelToJson(DocModel instance) => <String, dynamic>{
   'id': instance.id,
+  'url': instance.url,
+  'bookingNumber': instance.bookingNumber,
+  'filename': instance.filename,
+  'mimeType': instance.mimeType,
+  'filesize': instance.filesize,
+  'width': instance.width,
+  'height': instance.height,
   'title': instance.title,
   'name': instance.name,
   'description': instance.description,
@@ -151,6 +191,7 @@ Map<String, dynamic> _$DocModelToJson(DocModel instance) => <String, dynamic>{
   'location': instance.location,
   'reviewCount': instance.reviewCount,
   'minPrice': instance.minPrice,
+  'basePrice': instance.basePrice,
   'durationText': instance.durationText,
   'speciality': instance.speciality,
   'availability': instance.availability,
@@ -175,6 +216,7 @@ Map<String, dynamic> _$DocModelToJson(DocModel instance) => <String, dynamic>{
   'text': instance.text,
   'center': instance.center,
   'package': instance.package,
+  'packages': instance.packages,
   'startDate': instance.startDate,
   'slotTime': instance.slotTime,
   'assignedDoctor': instance.assignedDoctor,
@@ -184,6 +226,9 @@ Map<String, dynamic> _$DocModelToJson(DocModel instance) => <String, dynamic>{
   'chargeAmount': instance.chargeAmount,
   'chargeCurrency': instance.chargeCurrency,
   'isSaved': instance.isSaved,
+  'isActive': instance.isActive,
+  'services': instance.services,
+  'doctors': instance.doctors,
   'confirmedAt': instance.confirmedAt,
   'completedAt': instance.completedAt,
   'rejectedAt': instance.rejectedAt,
@@ -202,4 +247,11 @@ Map<String, dynamic> _$DocModelToJson(DocModel instance) => <String, dynamic>{
   'refundInitiatedAt': instance.refundInitiatedAt,
   'razorpayRefundId': instance.razorpayRefundId,
   'refundProcessedAt': instance.refundProcessedAt,
+  'enquiries': instance.enquiries,
+  'price': instance.price,
+  'duration': instance.duration,
+  'minGuests': instance.minGuests,
+  'maxGuests': instance.maxGuests,
+  'availableDates': instance.availableDates,
+  'hasConsultation': instance.hasConsultation,
 };

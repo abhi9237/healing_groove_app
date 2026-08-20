@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/common/common_widget.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/my_journey_controller.dart';
+import 'package:healing/controller/usercontroller/my_journey_controller.dart';
 import 'widget/my_journey_app_bar.dart';
 import 'widget/my_journey_tab_bar.dart';
 import 'widget/my_journey_card.dart';
@@ -23,7 +23,10 @@ class MyJourneyUi extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MyJourneyAppBar(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: const MyJourneyAppBar(),
+                ),
                 const SizedBox(height: 12),
                 MyJourneyTabBar(controller: controller),
                 const SizedBox(height: 8),

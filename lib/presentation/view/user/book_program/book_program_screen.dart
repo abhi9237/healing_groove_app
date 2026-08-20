@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_app_bar.dart';
-import 'package:healing/controller/book_program_controller.dart';
+import 'package:healing/controller/usercontroller/book_program_controller.dart';
 import 'package:healing/presentation/model/common/packages_model.dart';
 import 'widget/book_program_package_card.dart';
 import 'widget/book_program_select_date.dart';
@@ -52,8 +52,6 @@ class BookProgramScreen extends StatelessWidget {
                     ),
                   ),
                   BookProgramBottomBar(controller: controller),
-
-
                 ],
               ),
             ),

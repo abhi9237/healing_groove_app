@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/common/common_auth_background.dart';
-import 'package:healing/controller/cancel_confirmation_controller.dart';
+import 'package:healing/controller/usercontroller/cancel_confirmation_controller.dart';
 import 'widget/confirmation_header.dart';
 import 'widget/notification_card.dart';
 import 'widget/confirmation_buttons.dart';

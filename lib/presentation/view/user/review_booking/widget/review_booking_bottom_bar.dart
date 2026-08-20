@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:healing/common/common_methods.dart';
 import 'package:healing/common/common_widget.dart';
-import 'package:healing/controller/book_program_controller.dart';
+import 'package:healing/controller/usercontroller/book_program_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 
 class ReviewBookingBottomBar extends StatelessWidget {

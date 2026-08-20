@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healing/controller/view_detail_controller.dart';
+import 'package:healing/controller/usercontroller/view_detail_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 
 class ViewDetailWhyChoose extends StatelessWidget {

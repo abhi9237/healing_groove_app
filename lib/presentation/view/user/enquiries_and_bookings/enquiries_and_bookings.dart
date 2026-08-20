@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
-import 'package:healing/controller/enquiries_and_bookings_controller.dart';
+import 'package:healing/controller/usercontroller/enquiries_and_bookings_controller.dart';
 import '../../../../common/common_app_bar.dart';
 import 'widget/enquiries_header.dart';
 import 'widget/enquiry_card.dart';
@@ -27,9 +27,12 @@ class EnquiriesAndBookings extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverToBoxAdapter(
-                  child: const CommonAppBar(
-                    title: 'Enquiries & Bookings',
-                    showBackButton: false,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: const CommonAppBar(
+                      title: 'Enquiries & Bookings',
+                      showBackButton: false,
+                    ),
                   ),
                 ),
 

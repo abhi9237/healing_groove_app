@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healing/common/common_text_form_filled.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/edit_profile_controller.dart';
+import 'package:healing/controller/usercontroller/edit_profile_controller.dart';
 
 import '../../../../../core/image_constant/image_constant.dart';
 
@@ -13,8 +13,8 @@ class EditSecurityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      padding: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+      padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
@@ -121,13 +121,13 @@ class EditSecurityCard extends StatelessWidget {
           //     ],
           //   ),
           // ),
-          CommonTextFormFilled(
-            hintText: 'Enter old password',
-            controller: controller.passwordController,
-            obscureText: controller.obscurePassword,
-            suffixIcon: ImageConstant.passwordHideIcon,
-          ),
-          const SizedBox(height: 12),
+          // CommonTextFormFilled(
+          //   hintText: 'Enter old password',
+          //   controller: controller.passwordController,
+          //   obscureText: controller.obscurePassword,
+          //   suffixIcon: ImageConstant.passwordHideIcon,
+          // ),
+          // const SizedBox(height: 12),
 
           // Change Password Row Button
           Container(
@@ -140,7 +140,7 @@ class EditSecurityCard extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  // Password change handler placeholder
+                  controller.onTapChangePassword(context);
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Padding(

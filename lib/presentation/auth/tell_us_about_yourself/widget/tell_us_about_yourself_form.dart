@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:healing/common/common_text_form_filled.dart';
 import '../../../../common/common_bottom_sheet.dart';
-import '../../../../controller/create_account_controller.dart';
+import '../../../../controller/usercontroller/create_account_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 class TellUsAboutYourselfForm extends StatelessWidget {
@@ -125,7 +125,7 @@ class TellUsAboutYourselfForm extends StatelessWidget {
                     },
                   ),
                   child: Container(
-                    height: 68,
+                    height: 60,
                     width: 95,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -163,7 +163,7 @@ class TellUsAboutYourselfForm extends StatelessWidget {
                 // Mobile Number text field
                 Expanded(
                   child: Container(
-                    height: 68,
+                    height: 60,
                     decoration: BoxDecoration(
                       color: ColorConstant.whiteColor,
                       borderRadius: BorderRadius.circular(20),
@@ -197,7 +197,7 @@ class TellUsAboutYourselfForm extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 68,
+        height: 60,
         padding: const EdgeInsets.symmetric(horizontal: 18),
         decoration: BoxDecoration(
           color: ColorConstant.whiteColor,

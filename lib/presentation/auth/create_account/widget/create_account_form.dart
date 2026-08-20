@@ -1,8 +1,12 @@
+import 'dart:developer';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:healing/core/route/route_constant/route_constant.dart';
+import 'package:healing/core/storage/hive_storage_service.dart';
 import '../../../../common/common_button.dart';
 import '../../../../common/common_text_form_filled.dart';
-import '../../../../controller/create_account_controller.dart';
+import '../../../../controller/usercontroller/create_account_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 import '../../../../core/image_constant/image_constant.dart';
 
@@ -13,7 +17,7 @@ class CreateAccountForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 28),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 28),
       decoration: BoxDecoration(
         color: ColorConstant.whiteColor.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(35),
@@ -135,18 +139,18 @@ class CreateAccountForm extends StatelessWidget {
                       : SizedBox(),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 8),
               Expanded(
                 child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
+                  text: TextSpan(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: ColorConstant.greyColor,
                       fontFamily: 'Afacad',
                       height: 1.35,
                     ),
                     children: [
-                      TextSpan(text: 'I agree to the '),
+                      const TextSpan(text: 'I agree to the '),
                       TextSpan(
                         text: 'Terms & Conditions',
                         style: TextStyle(
@@ -155,16 +159,30 @@ class CreateAccountForm extends StatelessWidget {
                           decoration: TextDecoration.underline,
                           decorationColor: ColorConstant.appColor,
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.push(
+                              RouteConstant.termsAndPrivacy,
+                              extra: {'isTerms': true},
+                            );
+                          },
                       ),
-                      TextSpan(text: ' and '),
+                      const TextSpan(text: ' and '),
                       TextSpan(
                         text: 'Privacy Policy',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: ColorConstant.appColor,
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           decorationColor: ColorConstant.appColor,
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.push(
+                              RouteConstant.termsAndPrivacy,
+                              extra: {'isTerms': false},
+                            );
+                          },
                       ),
                     ],
                   ),
@@ -176,11 +194,12 @@ class CreateAccountForm extends StatelessWidget {
 
           // Button
           CommonButton(
-            height: 60,
+            height: 55,
             buttonText: 'Create Account',
             fontWeight: FontWeight.bold,
             borderRadius: 20,
             onTap: () {
+              log('${HiveStorageService.getUserType()}');
               controller.onTapCreateAccount(context);
             },
           ),

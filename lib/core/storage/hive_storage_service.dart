@@ -15,6 +15,10 @@ class HiveStorageService {
     await _box.put(StorageKeys.userToken, token);
   }
 
+  static Future<void> storeOnboardingComplete(bool complete) async {
+    await _box.put(StorageKeys.onboardingComplete, complete);
+  }
+
   static Future<void> storeRememberMe(bool value) async {
     await _box.put(StorageKeys.rememberMe, value);
   }
@@ -53,6 +57,14 @@ class HiveStorageService {
 
   static Future<void> storeCompleteProfile(bool type) async {
     await _box.put(StorageKeys.passCompleteProfile, type);
+  }
+
+  static Future<void> storeWellnessApprovalStatus(String status) async {
+    await _box.put(StorageKeys.wellnessApprovalStatus, status);
+  }
+
+  static Future<void> storeCenterId(int? id) async {
+    await _box.put(StorageKeys.centerId, id);
   }
 
   ///
@@ -101,6 +113,18 @@ class HiveStorageService {
 
   static String? getUserName() {
     return _box.get(StorageKeys.userName) as String?;
+  }
+
+  static String? getWellnessApprovalStatus() {
+    return _box.get(StorageKeys.wellnessApprovalStatus) as String?;
+  }
+
+  static bool? getOnboardingComplete() {
+    return _box.get(StorageKeys.onboardingComplete) as bool?;
+  }
+
+  static int? getCenterId() {
+    return _box.get(StorageKeys.centerId) as int?;
   }
 
   static Future<void> eraseAllData() async {

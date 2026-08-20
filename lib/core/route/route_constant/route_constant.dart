@@ -1,4 +1,5 @@
 class RouteConstant {
+  static const String splash = '/';
   static const String onBoarding = '/onBoarding';
   static const String welcome = '/welcome';
   static const String login = '/login';
@@ -18,7 +19,27 @@ class RouteConstant {
   static const String editProfile = '/editProfile';
   static const String helpSupport = '/helpSupport';
   static const String forgotPassword = '/forgotPassword';
+  static const String changePassword = '/changePassword';
   static const String bookProgram = '/bookProgram';
   static const String reviewBooking = '/reviewBooking';
   static const String savedProgram = '/savedProgram';
+  static const String setUpYourCentre = '/setUpYourCentre';
+  static const String centreDetail = '/centreDetail';
+  static const String makeItShine = '/makeItShine';
+  static const String centreUnderReview = '/centreUnderReview';
+  static const String wellnessDashboard = '/wellnessDashboard';
+  static const String wellnessBookingDetail = '/wellnessBookingDetail';
+  static const String programsAndPackages = '/programsAndPackages';
+  static const String addNewProgram = '/addNewProgram';
+  static const String addService = '/addService';
+  static const String wellnessServices = '/wellnessServices';
+  static const String programPreviewDetail = '/programPreviewDetail';
+  static const String consultationRequest = '/consultationRequest';
+  static const String guest = '/guest';
+  static const String doctors = '/doctors';
+  static const String addDoctor = '/addDoctor';
+  static const String revenue = '/revenue';
+  static const String report = '/report';
+  static const String support = '/support';
+  static const String termsAndPrivacy = '/termsAndPrivacy';
 }

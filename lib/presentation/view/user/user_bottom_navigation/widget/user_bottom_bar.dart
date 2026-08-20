@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/color_constant/color_constant.dart';
-import 'package:healing/controller/user_bottom_nav_controller.dart';
+import 'package:healing/controller/usercontroller/user_bottom_nav_controller.dart';
 
 class UserBottomBar extends StatelessWidget {
   final ValueChanged<int> onTap;
@@ -16,8 +16,9 @@ class UserBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 32),
+      padding: const EdgeInsets.only(bottom: 2),
       decoration: BoxDecoration(
-          borderRadius:BorderRadius.only(topLeft:Radius.circular(40) ,topRight:Radius.circular(40) ),
+          borderRadius:BorderRadius.only(topLeft:Radius.circular(30) ,topRight:Radius.circular(30) ),
         boxShadow: [
           BoxShadow(
             color: ColorConstant.whiteColor,
@@ -28,7 +29,7 @@ class UserBottomBar extends StatelessWidget {
         ],
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: ColorConstant.appColor,
           borderRadius: BorderRadius.circular(40),
@@ -53,8 +54,8 @@ class UserBottomBar extends StatelessWidget {
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
                 padding: isSelected
-                    ? const EdgeInsets.symmetric(horizontal: 18, vertical: 10)
-                    : const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    ? const EdgeInsets.symmetric(horizontal: 16, vertical: 7)
+                    : const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? ColorConstant.whiteColor
@@ -68,8 +69,8 @@ class UserBottomBar extends StatelessWidget {
                           Image.asset(
                             item['selectedIcon'] as String,
                             color: ColorConstant.appColor,
-                            height: 24,
-                            width: 24,
+                            height: 18,
+                            width: 18,
                             fit: BoxFit.contain,
                           ),
                           const SizedBox(width: 8),
@@ -93,7 +94,7 @@ class UserBottomBar extends StatelessWidget {
                             width: 20,
                             fit: BoxFit.contain,
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 3),
                           Text(
                             item['label'] as String,
                             style: const TextStyle(

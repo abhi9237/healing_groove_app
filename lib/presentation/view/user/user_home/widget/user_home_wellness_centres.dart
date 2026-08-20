@@ -1,7 +1,7 @@
 import 'package:custom_image_view/custom_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:healing/controller/user_home_controller.dart';
+import 'package:healing/controller/usercontroller/user_home_controller.dart';
 import 'package:healing/presentation/model/common/doc_model.dart';
 import '../../../../../common/common_methods.dart';
 import '../../../../../core/color_constant/color_constant.dart';
@@ -89,6 +89,24 @@ class WellNessCenterWidget extends StatelessWidget {
                   // Image with Overlay Badge
                   Stack(
                     children: [
+                      centreData.image == null ?
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(24),
+                        ),
+                        child: CustomImageView(
+                        imagePath: ImageConstant.imageNotFound,
+                          fit: BoxFit.cover,
+                          height: 200,
+                          width: MediaQuery.sizeOf(context).width,
+                          errorWidget: (_, _, _) => Image.asset(
+                            ImageConstant.imageNotFound,
+                            fit: BoxFit.fitWidth,
+                            height: 200,
+                          ),
+                        ),
+                      ):
+
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(24),
@@ -101,6 +119,7 @@ class WellNessCenterWidget extends StatelessWidget {
                           errorWidget: (_, _, _) => Image.asset(
                             ImageConstant.imageNotFound,
                             fit: BoxFit.fitWidth,
+                            height: 200,
                           ),
                         ),
                       ),

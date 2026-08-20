@@ -7,7 +7,7 @@ import 'package:healing/core/image_constant/image_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
 
 import '../../../../common/common_text_form_filled.dart';
-import '../../../../controller/login_controller.dart';
+import '../../../../controller/usercontroller/login_controller.dart';
 import 'login_remenberMe_widget.dart';
 
 class LoginBodyWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class LoginBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(35),
         color: ColorConstant.whiteColor.withValues(alpha: 0.4),
@@ -51,7 +51,7 @@ class LoginBodyWidget extends StatelessWidget {
             },
           ),
           CommonButton(
-            height: 60,
+            height: 55,
             buttonText: 'Sign In',
             fontWeight: FontWeight.bold,
             borderRadius: 20,

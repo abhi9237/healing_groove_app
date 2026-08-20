@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
 import '../../../../common/common_button.dart';
-import '../../../../controller/onBoarding_controller.dart';
+import '../../../../controller/usercontroller/onBoarding_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 class OnboardingBodyWidget extends StatelessWidget {
@@ -102,7 +102,7 @@ class OnboardingBodyWidget extends StatelessWidget {
 
                   // Primary action button
                   CommonButton(
-                    height: 65,
+                    height: 55,
                     buttonText: controller
                         .pages[controller.currentPage.value]
                         .buttonText,

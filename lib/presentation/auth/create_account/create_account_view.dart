@@ -4,7 +4,7 @@ import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/presentation/auth/create_account/widget/already_have_account_widget.dart';
 import '../../../common/account_progress_bar.dart';
 import '../../../common/app_loader.dart';
-import '../../../controller/create_account_controller.dart';
+import '../../../controller/usercontroller/create_account_controller.dart';
 import 'widget/create_account_form.dart';
 import 'widget/create_account_header.dart';
 

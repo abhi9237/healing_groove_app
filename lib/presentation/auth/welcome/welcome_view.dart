@@ -4,7 +4,7 @@ import 'package:healing/presentation/auth/welcome/widget/welcome_background_widg
 import 'package:healing/presentation/auth/welcome/widget/welcome_body_widget.dart';
 import 'package:healing/presentation/auth/welcome/widget/welcome_gradient_widget.dart';
 
-import '../../../controller/onBoarding_controller.dart';
+import '../../../controller/usercontroller/onBoarding_controller.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});

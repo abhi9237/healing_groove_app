@@ -10,6 +10,12 @@ class CommonTextFormFilled extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final VoidCallback? onTapSuffixIcon;
+  final VoidCallback? onTap;
+  final int? maxLines;
+  final double? height;
+  final bool readOnly;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   const CommonTextFormFilled({
     super.key,
@@ -19,29 +25,40 @@ class CommonTextFormFilled extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.onTapSuffixIcon,
+    this.maxLines = 1,
+    this.height,
+    this.keyboardType,
+    this.validator,
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 68,
+      constraints: BoxConstraints(minHeight: height ?? 55),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.grey.shade300, width: 1.2),
       ),
       child: TextFormField(
+        readOnly: readOnly,
+        onTap: onTap,
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         controller: controller,
         obscureText: obscureText,
+        maxLines: maxLines,
+        keyboardType: keyboardType,
+        validator: validator,
         style: const TextStyle(fontSize: 16, color: Colors.black87),
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.only(
-            top: 22,
-            bottom: 22,
+            top: maxLines != null && maxLines! > 1 ? 16 : 16,
+            bottom: maxLines != null && maxLines! > 1 ? 16 : 16,
             right: 15,
             left: prefixIcon == null ? 15 : 0,
           ),
@@ -57,7 +74,7 @@ class CommonTextFormFilled extends StatelessWidget {
               ? CustomImageView(
                   imagePath: prefixIcon,
                   fit: BoxFit.contain,
-                  height: 18,
+                  height: 15,
                   color: ColorConstant.lightBlackColor,
                 )
               : null,
@@ -78,7 +95,7 @@ class CommonTextFormFilled extends StatelessWidget {
                 )
               : null,
 
-          suffixIconConstraints: const BoxConstraints(minWidth: 60),
+          suffixIconConstraints: BoxConstraints(minWidth: height ?? 55),
         ),
       ),
     );
@@ -184,10 +201,16 @@ class CommonMapTextFormFilled extends StatelessWidget {
 class CommonSearchTextFilled extends StatelessWidget {
   final TextEditingController controller;
   final Function(String)? onChanged;
+  final String? suffixIcon;
+  final String? hintText;
+  final VoidCallback? onTapSuffixIcon;
   const CommonSearchTextFilled({
     super.key,
     required this.controller,
     this.onChanged,
+    this.suffixIcon,
+    this.onTapSuffixIcon,
+    this.hintText
   });
 
   @override
@@ -216,13 +239,30 @@ class CommonSearchTextFilled extends StatelessWidget {
           color: ColorConstant.lightBlackColor,
         ),
         decoration: InputDecoration(
-          hintText: 'Search by enquiry ID...',
+          hintText:hintText?? 'Search by enquiry ID...',
           hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade400),
           prefixIcon: Icon(
             Icons.search_rounded,
             color: Colors.grey.shade400,
             size: 24,
           ),
+
+          /// Suffix Icon
+          suffixIcon: suffixIcon != null
+              ? Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: onTapSuffixIcon,
+                    child: CustomImageView(
+                      imagePath: suffixIcon,
+                      fit: BoxFit.contain,
+                      height: 15,
+                      color: ColorConstant.lightBlackColor,
+                    ),
+                  ),
+                )
+              : null,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 14),
         ),

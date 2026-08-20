@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/settings_controller.dart';
+import 'package:healing/controller/usercontroller/settings_controller.dart';
+import 'package:healing/core/storage/hive_storage_service.dart';
 
 class SettingsProfileCard extends StatelessWidget {
   const SettingsProfileCard({super.key});
@@ -11,12 +12,8 @@ class SettingsProfileCard extends StatelessWidget {
     return GetBuilder<SettingsController>(
       init: SettingsController(),
       builder: (controller) {
-        final name = controller.isLoading
-            ? 'Loading...'
-            : controller.userProfileModel?.user?.name ?? 'User';
-        final email = controller.isLoading
-            ? 'Loading...'
-            : controller.userProfileModel?.user?.email ?? '';
+        final name = HiveStorageService.getUserName() ?? '';
+        final email = HiveStorageService.getUserEmail() ?? '';
 
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -73,28 +70,57 @@ class SettingsProfileCard extends StatelessWidget {
                       Stack(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(3.0),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
+                            padding: const EdgeInsets.all(25),
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                            ),
-                            child: const CircleAvatar(
-                              radius: 46,
-                              backgroundImage: NetworkImage(
-                                'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop',
+                              border: Border.all(
+                                color: ColorConstant.whiteColor,
+                                width: 1.5,
                               ),
                             ),
+                            child: Text(
+                             ( name != null && name.isNotEmpty) ? (name ?? '').substring(0, 1) : '',
+                              style: const TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                                color: ColorConstant.whiteColor,
+                              ),
+                            ),
+                            // const CircleAvatar(
+                            //   radius: 18,
+                            //   backgroundColor: ColorConstant.lightGreenColor,
+                            //   backgroundImage: NetworkImage(
+                            //     'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
+                            //   ),
+                            // ),
                           ),
+
+                          // Container(
+                          //   padding: const EdgeInsets.all(3.0),
+                          //   decoration: const BoxDecoration(
+                          //     color: Colors.white,
+                          //     shape: BoxShape.circle,
+                          //   ),
+                          //   child: const CircleAvatar(
+                          //     radius: 46,
+                          //     backgroundImage: NetworkImage(
+                          //       'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
+                          //     ),
+                          //   ),
+                          // ),
                           Positioned(
                             right: 2,
-                            bottom: 2,
+                            bottom: 10,
                             child: Container(
                               width: 28,
                               height: 28,
                               decoration: BoxDecoration(
                                 color: const Color(0xFF0C5C36), // Deep green
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 1.5),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1.5,
+                                ),
                               ),
                               child: const Center(
                                 child: Icon(
@@ -111,7 +137,7 @@ class SettingsProfileCard extends StatelessWidget {
 
                       // Name
                       Text(
-                        name,
+                        name ?? '',
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w800,
@@ -122,7 +148,7 @@ class SettingsProfileCard extends StatelessWidget {
 
                       // Email
                       Text(
-                        email,
+                        email ?? '',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

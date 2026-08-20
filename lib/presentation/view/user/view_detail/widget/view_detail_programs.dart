@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:custom_image_view/custom_image_view.dart';
-import 'package:healing/controller/view_detail_controller.dart';
+import 'package:healing/controller/usercontroller/view_detail_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
@@ -88,10 +89,11 @@ class ViewDetailPrograms extends StatelessWidget {
 
               return ProgramCardItem(
                 onTap: ()=> controller.onTapBookNow(context,packageData),
+                packageData: packageData,
                 doctors: packageData.doctors?.length,
                 imagePath: imageUrl.isNotEmpty ? imageUrl : '',
                 description: packageData.description ?? '',
-                title: packageData.name ?? 'Healing Package',
+                title: packageData.name ?? '',
                 duration: '${packageData.duration ?? 5} days',
                 servicesCount: '${packageData.services?.length ?? 0} services',
                 doctorCount: '${packageData.doctors?.length ?? 1} doctor',
@@ -123,6 +125,7 @@ class ProgramCardItem extends StatefulWidget {
   final String? doctorDetails;
   final int? doctors;
   final VoidCallback? onTap;
+  final PackagesModel? packageData;
 
   const ProgramCardItem({
     super.key,
@@ -139,6 +142,7 @@ class ProgramCardItem extends StatefulWidget {
     this.doctorDetails,
     this.doctors,
     this.onTap,
+    this.packageData,
   });
 
   @override
@@ -352,7 +356,7 @@ class _ProgramCardItemState extends State<ProgramCardItem> {
                             ),
                           ),
                           child: const Text(
-                            'Book Now1',
+                            'Book Now',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -368,7 +372,15 @@ class _ProgramCardItemState extends State<ProgramCardItem> {
                         height: 44,
                         child: OutlinedButton(
                           onPressed: () {
-                            context.push(RouteConstant.enquireNow);
+                            final detailController = Get.find<ViewDetailController>();
+                            context.push(
+                              RouteConstant.enquireNow,
+                              extra: {
+                                'center': detailController.centerDetail,
+                                'packages': detailController.centerProgramDetail.packages,
+                                'selectedPackage': widget.packageData,
+                              },
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(
@@ -472,7 +484,15 @@ class _ProgramCardItemState extends State<ProgramCardItem> {
                       height: 38,
                       child: OutlinedButton(
                         onPressed: () {
-                          context.push(RouteConstant.enquireNow);
+                          final detailController = Get.find<ViewDetailController>();
+                          context.push(
+                            RouteConstant.enquireNow,
+                            extra: {
+                              'center': detailController.centerDetail,
+                              'packages': detailController.centerProgramDetail.packages,
+                              'selectedPackage': widget.packageData,
+                            },
+                          );
                         },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(

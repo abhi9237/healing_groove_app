@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/color_constant/color_constant.dart';
 import '../../../../../core/image_constant/image_constant.dart';
-import 'package:healing/controller/my_journey_detail_controller.dart';
+import 'package:healing/controller/usercontroller/my_journey_detail_controller.dart';
 
 class MyJourneyDetailResortCard extends StatelessWidget {
   final MyJourneyDetailController controller;
@@ -150,7 +150,7 @@ class MyJourneyDetailResortCard extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 11,
                           backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150',
+                            'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
                           ),
                         ),
                       ),
@@ -159,7 +159,7 @@ class MyJourneyDetailResortCard extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 11,
                           backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150',
+                            'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
                           ),
                         ),
                       ),

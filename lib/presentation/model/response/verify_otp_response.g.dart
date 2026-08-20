@@ -14,6 +14,8 @@ VerifyOtpResponse _$VerifyOtpResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : UserModel.fromJson(json['user'] as Map<String, dynamic>),
       exp: (json['exp'] as num?)?.toInt(),
+      refreshToken: json['refreshToken'] as String?,
+      resetToken: json['resetToken'] as String?,
     );
 
 Map<String, dynamic> _$VerifyOtpResponseToJson(VerifyOtpResponse instance) =>
@@ -22,4 +24,6 @@ Map<String, dynamic> _$VerifyOtpResponseToJson(VerifyOtpResponse instance) =>
       'token': instance.token,
       'user': instance.user,
       'exp': instance.exp,
+      'refreshToken': instance.refreshToken,
+      'resetToken': instance.resetToken,
     };

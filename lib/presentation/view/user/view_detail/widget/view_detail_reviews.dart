@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healing/controller/view_detail_controller.dart';
+import 'package:healing/controller/usercontroller/view_detail_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 
 import '../../../../../common/common_methods.dart';
@@ -42,7 +42,7 @@ class ViewDetailReviews extends StatelessWidget {
                 rating: data.rating ?? 0,
                 comment: data.text ?? '',
                 avatarUrl:
-                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop',
+                    'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png',
               );
             },
           ),

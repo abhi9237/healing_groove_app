@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_app_bar.dart';
 import 'package:healing/common/common_auth_background.dart';
-import 'package:healing/controller/edit_profile_controller.dart';
+import 'package:healing/controller/usercontroller/edit_profile_controller.dart';
 import 'package:healing/presentation/view/user/edit_profile/widget/edit_profile_shimmer_effect.dart';
 import 'widget/edit_profile_header_card.dart';
 import 'widget/edit_personal_space_card.dart';
@@ -32,9 +32,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               EditProfileHeaderCard(
-                                 controller: controller,
-                               ),
+                              EditProfileHeaderCard(controller: controller),
 
                               EditPersonalSpaceCard(controller: controller),
                               const SizedBox(height: 12),

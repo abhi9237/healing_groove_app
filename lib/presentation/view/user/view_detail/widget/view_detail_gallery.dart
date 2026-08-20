@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:custom_image_view/custom_image_view.dart';
-import 'package:healing/controller/view_detail_controller.dart';
+import 'package:healing/controller/usercontroller/view_detail_controller.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
 import 'package:healing/common/common_widget.dart';
 import 'package:healing/core/color_constant/color_constant.dart';

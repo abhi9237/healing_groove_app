@@ -11,7 +11,8 @@ Future<void> showToastMessage({
   required String message,
   required BuildContext context,
   required bool isError,
-}) async {
+}) async
+{
   toastification.show(
     context: context,
     type: isError ? ToastificationType.error : ToastificationType.success,

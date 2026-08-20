@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import '../../../../common/common_button.dart';
 import '../../../../common/common_methods.dart';
-import '../../../../controller/create_account_controller.dart';
+import '../../../../controller/usercontroller/create_account_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 
@@ -68,7 +68,7 @@ class VerifyOtpForm extends StatelessWidget {
 
         // Verify button
         CommonButton(
-          height: 60,
+          height: 55,
           buttonText: 'Verify & Continue',
           fontWeight: FontWeight.bold,
           borderRadius: 20,

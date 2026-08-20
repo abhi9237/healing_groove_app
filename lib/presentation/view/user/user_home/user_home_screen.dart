@@ -5,7 +5,7 @@ import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
-import 'package:healing/controller/user_home_controller.dart';
+import 'package:healing/controller/usercontroller/user_home_controller.dart';
 import 'package:healing/presentation/view/user/user_home/widget/user_home_screen_shimmer.dart';
 import 'package:healing/presentation/view/user/user_home/widget/user_home_top_delegate_view.dart';
 import 'widget/user_home_header.dart';
@@ -32,7 +32,7 @@ class UserHomeScreen extends StatelessWidget {
                     slivers: [
                       SliverToBoxAdapter(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 50),
+                          padding: const EdgeInsets.only(top: 52),
                           child: UserHomeHeader(),
                         ),
                       ),

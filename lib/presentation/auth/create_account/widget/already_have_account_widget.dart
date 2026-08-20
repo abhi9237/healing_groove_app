@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
-import '../../../../controller/create_account_controller.dart';
+import '../../../../controller/usercontroller/create_account_controller.dart';
 import '../../../../core/color_constant/color_constant.dart';
 
 class AlreadyHaveAccountWidget extends StatelessWidget {

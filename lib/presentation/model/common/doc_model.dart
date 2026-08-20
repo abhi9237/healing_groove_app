@@ -1,12 +1,18 @@
 import 'package:healing/common/common_methods.dart';
-import 'package:healing/controller/book_program_controller.dart';
+import 'package:healing/controller/usercontroller/book_program_controller.dart';
+import 'package:healing/presentation/model/common/assigned_doctor.dart';
 import 'package:healing/presentation/model/common/centre_model.dart';
+import 'package:healing/presentation/model/common/doctor_model.dart';
+import 'package:healing/presentation/model/common/enquiries_model.dart';
 import 'package:healing/presentation/model/common/guests_model.dart';
 import 'package:healing/presentation/model/common/image_model.dart';
 import 'package:healing/presentation/model/common/location_model.dart';
+import 'package:healing/presentation/model/common/managed_by_model.dart';
 import 'package:healing/presentation/model/common/packages_model.dart';
 import 'package:healing/presentation/model/common/reviews_model.dart';
 import 'package:healing/presentation/model/common/saved_centre_model.dart';
+import 'package:healing/presentation/model/common/service_model.dart';
+import 'package:healing/presentation/model/common/available_dates_model.dart';
 import 'package:healing/presentation/model/common/session_model.dart';
 import 'package:healing/presentation/model/common/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -17,6 +23,13 @@ part 'doc_model.g.dart';
 @JsonSerializable()
 class DocModel {
   int? id;
+  String? url;
+  String? bookingNumber;
+  String? filename;
+  String? mimeType;
+  int? filesize;
+  int? width;
+  int? height;
   String? title;
   String? name;
   String? description;
@@ -26,7 +39,7 @@ class DocModel {
   int? rating;
   ImageModel? image;
   String? role;
-  dynamic managedBy;
+  ManagedBy? managedBy;
   String? status;
   bool? onboardingCompleted;
   dynamic dateOfBirth;
@@ -46,6 +59,7 @@ class DocModel {
   LocationModel? location;
   int? reviewCount;
   int? minPrice;
+  int? basePrice;
   String? durationText;
   String? speciality;
   String? availability;
@@ -70,15 +84,19 @@ class DocModel {
   String? text;
   CentreModel? center;
   PackagesModel? package;
+  List<PackagesModel>? packages;
   String? startDate;
   dynamic? slotTime;
-  List<dynamic>? assignedDoctor;
+  List<AssignedDoctor>? assignedDoctor;
   int? groupSize;
   List<GuestsModel>? guests;
   int? totalAmount;
   int? chargeAmount;
   String? chargeCurrency;
   bool? isSaved;
+  bool? isActive;
+  List<ServiceModel>? services;
+  List<DoctorModel>? doctors;
   dynamic confirmedAt;
   dynamic completedAt;
   dynamic rejectedAt;
@@ -97,6 +115,13 @@ class DocModel {
   dynamic refundInitiatedAt;
   dynamic razorpayRefundId;
   dynamic refundProcessedAt;
+  EnquiriesModel? enquiries;
+  int? price;
+  int? duration;
+  int? minGuests;
+  int? maxGuests;
+  List<AvailableDatesModel>? availableDates;
+  bool? hasConsultation;
 
   DocModel({
     this.id,
@@ -130,10 +155,12 @@ class DocModel {
     this.rating,
     this.sessions,
     this.reviewCount,
+    this.packages,
     this.minPrice,
     this.durationText,
     this.speciality,
     this.availability,
+    this.hasConsultation,
     this.gallery,
     this.approvalStatus,
     this.capacity,
@@ -180,6 +207,23 @@ class DocModel {
     this.refundInitiatedAt,
     this.razorpayRefundId,
     this.refundProcessedAt,
+    this.enquiries,
+    this.url,
+    this.filename,
+    this.mimeType,
+    this.filesize,
+    this.width,
+    this.height,
+    this.services,
+    this.doctors,
+    this.basePrice,
+    this.isActive,
+    this.price,
+    this.duration,
+    this.minGuests,
+    this.maxGuests,
+    this.availableDates,
+    this.bookingNumber
   });
 
   factory DocModel.fromJson(Map<String, dynamic> json) {
@@ -228,6 +272,38 @@ class DocModel {
       );
     }
 
+    EnquiriesModel? enquiriesModel;
+    if (json['enquiries'] is Map<String, dynamic>) {
+      enquiriesModel = EnquiriesModel.fromJson(
+        json['enquiries'] as Map<String, dynamic>,
+      );
+    }
+
+
+    ManagedBy? managedBy;
+    if (json['managedBy'] is Map<String, dynamic>) {
+      managedBy = ManagedBy.fromJson(
+        json['managedBy'] as Map<String, dynamic>,
+      );
+    }
+
+
+    List<AssignedDoctor>? assignedDoctor;
+    if (json['assignedDoctor'] is List) {
+      assignedDoctor = (json['assignedDoctor'] as List)
+          .whereType<Map<String, dynamic>>()
+          .map((e) => AssignedDoctor.fromJson(e))
+          .toList();
+    }
+
+    List<PackagesModel>? packages;
+    if (json['packages'] is List) {
+      packages = (json['packages'] as List)
+          .whereType<Map<String, dynamic>>()
+          .map((e) => PackagesModel.fromJson(e))
+          .toList();
+    }
+
     UserModel? userModel;
     if (json['user'] is Map<String, dynamic>) {
       userModel = UserModel.fromJson(json['user'] as Map<String, dynamic>);
@@ -246,6 +322,30 @@ class DocModel {
       wellnessGoalsList = (json['wellnessGoals'] as List)
           .map((e) => e.toString())
           .toList();
+    }
+
+    List<ServiceModel>? services;
+    if (json['services'] is List) {
+      services = (json['services'] as List).map((e) {
+        if (e is int) {
+          return ServiceModel(id: e);
+        } else if (e is Map<String, dynamic>) {
+          return ServiceModel.fromJson(e);
+        }
+        throw Exception('Invalid service format');
+      }).toList();
+    }
+
+    List<DoctorModel>? doctors;
+    if (json['doctors'] is List) {
+      doctors = (json['doctors'] as List).map((e) {
+        if (e is int) {
+          return DoctorModel(id: e);
+        } else if (e is Map<String, dynamic>) {
+          return DoctorModel.fromJson(e);
+        }
+        throw Exception('Invalid doctor format');
+      }).toList();
     }
 
     List<String>? preferredActivitiesList;
@@ -277,20 +377,86 @@ class DocModel {
     }
 
     CentreModel? centerModel;
-    if (json['center'] is Map<String, dynamic>) {
-      centerModel = CentreModel.fromJson(json['center'] as Map<String, dynamic>);
+
+    final center = json['center'];
+
+    if (center is Map<String, dynamic>) {
+      centerModel = CentreModel.fromJson(center);
+    } else if (center is num) {
+      centerModel = CentreModel(id: center.toInt());
+    } else if (center is String) {
+      final id = int.tryParse(center);
+      if (id != null) {
+        centerModel = CentreModel(id: id);
+      }
     }
 
     PackagesModel? packageModel;
     if (json['package'] is Map<String, dynamic>) {
-      packageModel = PackagesModel.fromJson(json['package'] as Map<String, dynamic>);
+      packageModel = PackagesModel.fromJson(
+        json['package'] as Map<String, dynamic>,
+      );
     }
 
+    final requirementsMap = json['requirements'];
+
     List<GuestsModel>? guestsList;
-    if (json['guests'] is List) {
+    if (requirementsMap is Map<String, dynamic> &&
+        requirementsMap['guestDetails'] is List) {
+      guestsList = [];
+      for (var item in (requirementsMap['guestDetails'] as List)) {
+        if (item is Map<String, dynamic>) {
+          final ageVal = item['age'];
+          int? parsedAge;
+          if (ageVal is num) {
+            parsedAge = ageVal.toInt();
+          } else if (ageVal is String) {
+            parsedAge = int.tryParse(ageVal);
+          }
+          guestsList.add(
+            GuestsModel(
+              id: item['id']?.toString(),
+              fullName: item['name'] as String?,
+              age: parsedAge,
+              gender: item['gender'] as String?,
+            ),
+          );
+        }
+      }
+    } else if (json['guests'] is List) {
       guestsList = (json['guests'] as List)
           .whereType<Map<String, dynamic>>()
           .map((e) => GuestsModel.fromJson(e))
+          .toList();
+    }
+
+    String? startDateVal = json['startDate'] as String?;
+    int? groupSizeVal = parseInt(json['groupSize']);
+    String? messageVal = json['message'] as String?;
+    List<String>? wellnessGoalsVal = wellnessGoalsList;
+
+    if (requirementsMap is Map<String, dynamic>) {
+      if (requirementsMap['preferredDate'] != null) {
+        startDateVal = requirementsMap['preferredDate'] as String?;
+      }
+      if (requirementsMap['groupSize'] != null) {
+        groupSizeVal = parseInt(requirementsMap['groupSize']);
+      }
+      if (requirementsMap['concern'] != null) {
+        messageVal = requirementsMap['concern'] as String?;
+      }
+      if (requirementsMap['wellnessGoals'] is List) {
+        wellnessGoalsVal = (requirementsMap['wellnessGoals'] as List)
+            .map((e) => e.toString())
+            .toList();
+      }
+    }
+
+    List<AvailableDatesModel>? availableDatesList;
+    if (json['availableDates'] is List) {
+      availableDatesList = (json['availableDates'] as List)
+          .whereType<Map<String, dynamic>>()
+          .map((e) => AvailableDatesModel.fromJson(e))
           .toList();
     }
 
@@ -302,7 +468,7 @@ class DocModel {
       amenities: amenitiesList,
       country: json['country'] as String?,
       role: json['role'] as String?,
-      managedBy: json['managedBy'],
+      managedBy: managedBy,
       status: json['status'] as String?,
       onboardingCompleted: json['onboardingCompleted'] is bool
           ? json['onboardingCompleted'] as bool
@@ -310,7 +476,7 @@ class DocModel {
       dateOfBirth: json['dateOfBirth'],
       age: parseInt(json['age']),
       gender: json['gender'] as String?,
-      wellnessGoals: wellnessGoalsList,
+      wellnessGoals: wellnessGoalsVal,
       preferredActivities: preferredActivitiesList,
       savedCenters: savedCentersList,
       specialization: json['specialization'],
@@ -339,7 +505,7 @@ class DocModel {
       facilities: facilitiesList,
       displayOrder: parseInt(json['displayOrder']),
       subject: json['subject'] as String?,
-      message: json['message'] as String?,
+      message: messageVal,
       sourceType: json['sourceType'] as String?,
       response: json['response'],
       user: userModel,
@@ -350,10 +516,10 @@ class DocModel {
       text: json['text'] as String?,
       center: centerModel,
       package: packageModel,
-      startDate: json['startDate'] as String?,
+      startDate: startDateVal,
       slotTime: json['slotTime'],
-      assignedDoctor: json['assignedDoctor'] as List<dynamic>?,
-      groupSize: parseInt(json['groupSize']),
+      assignedDoctor: assignedDoctor,
+      groupSize: groupSizeVal,
       guests: guestsList,
       totalAmount: parseInt(json['totalAmount']),
       chargeAmount: parseInt(json['chargeAmount']),
@@ -376,7 +542,26 @@ class DocModel {
       refundInitiatedAt: json['refundInitiatedAt'],
       razorpayRefundId: json['razorpayRefundId'],
       refundProcessedAt: json['refundProcessedAt'],
-      isSaved: json['isSaved']
+      isSaved: json['isSaved'],
+      url: json['url'],
+      filename: json['filename'],
+      mimeType: json['mimeType'],
+      filesize: json['filesize'],
+      width: json['width'],
+      height: json['height'],
+      enquiries: enquiriesModel,
+      doctors: doctors,
+      services: services,
+      packages: packages,
+      basePrice: json['basePrice'],
+      isActive: json['isActive'],
+      bookingNumber: json['bookingNumber'],
+      price: parseInt(json['price']),
+      duration: parseInt(json['duration']),
+      minGuests: parseInt(json['minGuests']),
+      maxGuests: parseInt(json['maxGuests']),
+      availableDates: availableDatesList,
+      hasConsultation: json['hasConsultation'],
     )..reviews = reviewsModel;
   }
 

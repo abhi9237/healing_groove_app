@@ -32,7 +32,8 @@ class AuthRepository {
     }
   }
 
-  Future<Response> sendOtp({required Map<String, dynamic> data}) async {
+  Future<Response> sendOtp({required Map<String, dynamic> data}) async
+  {
     log('AuthRepository: API Send OTP initiated for email: $data');
     log('AuthRepository: Endpoint is ${ApiConstant.sendOtp}');
 
@@ -52,7 +53,8 @@ class AuthRepository {
     }
   }
 
-  Future<Response> reSendOtp({required Map<String, dynamic> data}) async {
+  Future<Response> reSendOtp({required Map<String, dynamic> data}) async
+  {
     log('AuthRepository: API Send OTP initiated for email: $data');
     log('AuthRepository: Endpoint is ${ApiConstant.resendOtp}');
 
@@ -75,7 +77,8 @@ class AuthRepository {
   Future<Response> createAccount({
     required Map<String, dynamic> data,
     required String id,
-  }) async {
+  }) async
+  {
     log('AuthRepository: API Create Account initiated for email: $data');
     log('AuthRepository: Endpoint is ${ApiConstant.createAccount}');
 
@@ -116,12 +119,34 @@ class AuthRepository {
     }
   }
 
+  Future<Response> resetPassword({required Map<String, dynamic> data}) async {
+    log('AuthRepository: API Verify OTP initiated for email: $data');
+    log('AuthRepository: Endpoint is ${ApiConstant.resetPassword}');
+
+    try {
+      final response = await _apiCall.postRequest(
+        endPoint: ApiConstant.resetPassword,
+        data: data,
+      );
+      log(
+        'AuthRepository: Sign In API call returned with status code: ${response.statusCode}',
+      );
+      log('AuthRepository: Response data: ${response.data}');
+      return response;
+    } catch (error) {
+      log('AuthRepository: Sign In API call failed with error: $error');
+      rethrow;
+    }
+  }
+
   Future<Response> refreshToken() async {
     log('AuthRepository: Endpoint is ${ApiConstant.refreshToken}');
 
     try {
+      final token = HiveStorageService.getRefreshToken() ?? HiveStorageService.getUserToken();
       final response = await _apiCall.postRequest(
         endPoint: ApiConstant.refreshToken,
+        token: token,
       );
 
       log(
@@ -131,6 +156,26 @@ class AuthRepository {
       return response;
     } catch (error) {
       log('AuthRepository: Sign In API call failed with error: $error');
+      rethrow;
+    }
+  }
+
+  Future<Response> getCentreStatus({int? centerId}) async {
+    log('AuthRepository: API getCentreStatus initiated for centerId: $centerId');
+    final String endPoint = centerId != null
+        ? '${ApiConstant.centreStatus}/$centerId'
+        : ApiConstant.centreStatus;
+    log('AuthRepository: Endpoint is $endPoint');
+
+    try {
+      final response = await _apiCall.getRequest(
+        endPoint: endPoint,
+        token: HiveStorageService.getUserToken(),
+      );
+      log('AuthRepository: getCentreStatus response status code: ${response.statusCode}');
+      return response;
+    } catch (error) {
+      log('AuthRepository: getCentreStatus failed with error: $error');
       rethrow;
     }
   }

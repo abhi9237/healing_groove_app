@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/common/common_app_bar.dart';
 import 'package:healing/common/common_auth_background.dart';
-import 'package:healing/controller/help_support_controller.dart';
+import 'package:healing/controller/usercontroller/help_support_controller.dart';
 import 'widget/support_header.dart';
 import 'widget/support_chips.dart';
 import 'widget/support_request_card.dart';
@@ -44,7 +44,7 @@ class HelpSupportScreen extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         // Recent Enquiries status box
-                        const SupportRecentEnquiries(),
+                        SupportRecentEnquiries(recentEnquiries: controller.recentEnquiries),
                       ],
                     ),
                   ),

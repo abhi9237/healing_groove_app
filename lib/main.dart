@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:healing/controller/account_progress_controller.dart';
+import 'package:healing/controller/usercontroller/account_progress_controller.dart';
 import 'package:toastification/toastification.dart';
 import 'core/app_binding/app_binding.dart';
 import 'core/app_theme/app_theme.dart';

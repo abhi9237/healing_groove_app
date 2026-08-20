@@ -4,7 +4,7 @@ import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/presentation/auth/login/widget/login_body_widget.dart';
 import 'package:healing/presentation/auth/login/widget/login_top_widget.dart';
-import '../../../controller/login_controller.dart';
+import '../../../controller/usercontroller/login_controller.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});

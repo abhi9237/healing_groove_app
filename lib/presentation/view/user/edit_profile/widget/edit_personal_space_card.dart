@@ -2,7 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/edit_profile_controller.dart';
+import 'package:healing/controller/usercontroller/edit_profile_controller.dart';
 
 import '../../../../../common/common_bottom_sheet.dart';
 import '../../../../../common/common_widget.dart';
@@ -160,7 +160,7 @@ class EditPersonalSpaceCard extends StatelessWidget {
               Expanded(
                 child: _buildDropdown(
                   label: 'Gender',
-                  value: controller.selectedGender.value,
+                  value: controller.selectedGender.value.capitalizeFirst ?? '',
                   onTap: () {
                     showGenderBottomSheet(
                       context: context,
@@ -195,34 +195,36 @@ class EditPersonalSpaceCard extends StatelessWidget {
           const SizedBox(height: 20),
 
           // Save Changes Button (Green)
-          Obx(()=> controller.isLoading.value ==true ? CommonCircularIndicator():
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton.icon(
-                onPressed: () => controller.onTapUpdateProfile(context),
-                icon: const Icon(
-                  Icons.save_outlined,
-                  color: Colors.white,
-                  size: 18,
-                ),
-                label: const Text(
-                  'Save Changes',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+          Obx(
+            () => controller.isLoadingSaveChanges.value == true
+                ? CommonCircularIndicator()
+                : SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton.icon(
+                      onPressed: () => controller.onTapUpdateProfile(context),
+                      icon: const Icon(
+                        Icons.save_outlined,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      label: const Text(
+                        'Save Changes',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorConstant.appColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorConstant.appColor,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),

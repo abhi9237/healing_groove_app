@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:healing/controller/user_home_controller.dart';
+import 'package:healing/controller/usercontroller/user_home_controller.dart';
 import 'package:healing/presentation/view/user/user_home/widget/user_home_stats.dart';
 import '../../../../../core/color_constant/color_constant.dart';
 import '../../../../../core/route/route_constant/route_constant.dart';

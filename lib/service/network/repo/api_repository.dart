@@ -20,6 +20,16 @@ abstract class ApiRepository {
     CancelToken? cancelToken,
   });
 
+  Future<Response<T>> postMultipartRequest<T>({
+    required String endPoint,
+    String? token,
+    Map<String, dynamic>? queryParameters,
+    required FormData data,
+    Map<String, String>? extraHeaders,
+    Options? options,
+    CancelToken? cancelToken,
+  });
+
   Future<Response<T>> putRequest<T>({
     required String endPoint,
     String? token,

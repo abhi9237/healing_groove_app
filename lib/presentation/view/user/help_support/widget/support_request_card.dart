@@ -3,7 +3,7 @@ import 'package:healing/common/common_button.dart';
 import 'package:healing/common/common_widget.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/image_constant/image_constant.dart';
-import 'package:healing/controller/help_support_controller.dart';
+import 'package:healing/controller/usercontroller/help_support_controller.dart';
 
 class SupportRequestCard extends StatelessWidget {
   final HelpSupportController controller;

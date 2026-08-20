@@ -66,4 +66,25 @@ class ViewDetailRepository {
       rethrow;
     }
   }
+
+  Future<Response> enquireService(Map<String, dynamic> data) async {
+    log('SettingsRepository: Endpoint is ${ApiConstant.enquireService}');
+
+    try {
+      final response = await _apiCall.postRequest(
+        endPoint: ApiConstant.enquireService,
+        token: HiveStorageService.getUserToken(),
+        data: data,
+      );
+
+      log(
+        'SettingsRepository: Enquire Service API call returned with status code: ${response.statusCode}',
+      );
+      log('SettingsRepository: Response data: ${response.data}');
+      return response;
+    } catch (error) {
+      log('SettingsRepository: Enquire Service API call failed with error: $error');
+      rethrow;
+    }
+  }
 }

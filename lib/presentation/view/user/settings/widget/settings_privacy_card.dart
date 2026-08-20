@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
+import 'package:healing/core/route/route_constant/route_constant.dart';
 
 class SettingsPrivacyCard extends StatelessWidget {
   const SettingsPrivacyCard({super.key});
@@ -61,18 +63,26 @@ class SettingsPrivacyCard extends StatelessWidget {
               children: [
                 _buildListTile(
                   label: 'Privacy Policy',
-                  onTap: () {},
+                  onTap: () {
+                    context.push(RouteConstant.termsAndPrivacy,
+                        extra: {'isTerms': false}
+                    );
+                  },
                 ),
                 _buildDivider(),
                 _buildListTile(
                   label: 'Terms of Service',
-                  onTap: () {},
+                  onTap: () {
+                    context.push(RouteConstant.termsAndPrivacy,
+                        extra: {'isTerms': true}
+                    );
+                  },
                 ),
-                _buildDivider(),
-                _buildListTile(
-                  label: 'Cookie Policy',
-                  onTap: () {},
-                ),
+                // _buildDivider(),
+                // _buildListTile(
+                //   label: 'Cookie Policy',
+                //   onTap: () {},
+                // ),
               ],
             ),
           ),

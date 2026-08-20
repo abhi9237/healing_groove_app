@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
+import 'package:custom_image_view/custom_image_view.dart';
+import 'package:healing/core/image_constant/image_constant.dart';
 
 class ExploreWellnessCard extends StatefulWidget {
   final String title;
@@ -13,6 +15,7 @@ class ExploreWellnessCard extends StatefulWidget {
   final String imagePath;
   final String programName;
   final bool isVerified;
+  final int? centerId;
 
   const ExploreWellnessCard({
     super.key,
@@ -25,6 +28,7 @@ class ExploreWellnessCard extends StatefulWidget {
     required this.imagePath,
     required this.programName,
     this.isVerified = true,
+    this.centerId,
   });
 
   @override
@@ -58,12 +62,25 @@ class _ExploreWellnessCardState extends State<ExploreWellnessCard> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                child: Image.asset(
-                  widget.imagePath,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                child: widget.imagePath.startsWith('http')
+                    ? CustomImageView(
+                        url: widget.imagePath,
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        errorWidget: (_, _, _) => Image.asset(
+                          ImageConstant.imageNotFound,
+                          fit: BoxFit.cover,
+                          height: 200,
+                          width: double.infinity,
+                        ),
+                      )
+                    : Image.asset(
+                  ImageConstant.imageNotFound,
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
               ),
               
               // Top-Left Verified Badge
@@ -287,7 +304,10 @@ class _ExploreWellnessCardState extends State<ExploreWellnessCard> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => context.push(RouteConstant.viewDetail),
+                    onPressed: () => context.push(
+                      RouteConstant.viewDetail,
+                      extra: {'centerId': widget.centerId ?? 0},
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorConstant.appColor,
                       elevation: 0,

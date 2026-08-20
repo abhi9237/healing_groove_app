@@ -8,12 +8,16 @@ class LogInResponseModel {
   int? exp;
   String? token;
   UserModel? user;
+  String? refreshToken;
 
 
-  LogInResponseModel({this.message, this.exp, this.token, this.user});
+  LogInResponseModel({this.message, this.exp, this.token, this.user, this.refreshToken});
 
-  factory LogInResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$LogInResponseModelFromJson(json);
+  factory LogInResponseModel.fromJson(Map<String, dynamic> json) {
+    final model = _$LogInResponseModelFromJson(json);
+    model.refreshToken = json['refreshToken'] as String? ?? json['refresh_token'] as String?;
+    return model;
+  }
 
   Map<String, dynamic> toJson() => _$LogInResponseModelToJson(this);
 }

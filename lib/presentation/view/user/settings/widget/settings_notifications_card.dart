@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/settings_controller.dart';
+import 'package:healing/controller/usercontroller/settings_controller.dart';
 
 class SettingsNotificationsCard extends StatelessWidget {
   const SettingsNotificationsCard({super.key});

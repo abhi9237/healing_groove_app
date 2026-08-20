@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_auth_background.dart';
-import '../../../controller/forgot_password_controller.dart';
+import '../../../controller/usercontroller/forgot_password_controller.dart';
 import 'widget/forgot_password_top_widget.dart';
 import 'widget/forgot_password_body_widget.dart';
 

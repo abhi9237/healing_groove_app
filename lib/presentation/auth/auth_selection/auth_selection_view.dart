@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healing/common/common_auth_background.dart';
 import 'package:healing/presentation/auth/auth_selection/widget/auth_selection_bottom_widget.dart';
-import '../../../controller/create_account_controller.dart';
+import '../../../controller/usercontroller/create_account_controller.dart';
 import 'widget/auth_option_card.dart';
 import 'widget/auth_selection_header.dart';
 

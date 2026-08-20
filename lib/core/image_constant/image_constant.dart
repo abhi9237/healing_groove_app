@@ -27,4 +27,7 @@ class ImageConstant {
   static const String heartIcon = "${path}heart_icon.png";
   static const String sendMessageIcon = "${path}send_message_icon.png";
   static const String imageNotFound = "${path}image_not_found.jpg";
+  static const String downArrowIcon = "${path}down_arrow_icon.png";
+  static const String filerIcon = "${path}filter_icon.png";
+  static const String splashImg = "${path}splash_logo.png";
 }

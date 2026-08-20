@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../common/common_text_form_filled.dart';
 import '../../../../../core/color_constant/color_constant.dart';
-import 'package:healing/controller/enquiries_and_bookings_controller.dart';
+import 'package:healing/controller/usercontroller/enquiries_and_bookings_controller.dart';
 
 class EnquiriesHeaderDescription extends StatelessWidget {
   const EnquiriesHeaderDescription({super.key});
@@ -95,39 +95,39 @@ class EnquiriesSearchFilters extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
-              Container(
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey.shade200),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.02),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    onTap: () {
-                      // Just reset filters or show a simple toast as placeholder
-                    },
-                    child: const Center(
-                      child: Icon(
-                        Icons.filter_list_rounded,
-                        color: ColorConstant.lightBlackColor,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // const SizedBox(width: 12),
+              // Container(
+              //   width: 52,
+              //   height: 52,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     borderRadius: BorderRadius.circular(16),
+              //     border: Border.all(color: Colors.grey.shade200),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.black.withValues(alpha: 0.02),
+              //         blurRadius: 10,
+              //         offset: const Offset(0, 4),
+              //       ),
+              //     ],
+              //   ),
+              //   child: Material(
+              //     color: Colors.transparent,
+              //     child: InkWell(
+              //       borderRadius: BorderRadius.circular(16),
+              //       onTap: () {
+              //         // Just reset filters or show a simple toast as placeholder
+              //       },
+              //       child: const Center(
+              //         child: Icon(
+              //           Icons.filter_list_rounded,
+              //           color: ColorConstant.lightBlackColor,
+              //           size: 24,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],

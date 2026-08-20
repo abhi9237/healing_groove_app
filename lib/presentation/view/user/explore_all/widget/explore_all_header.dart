@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:healing/common/common_methods.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
-import 'package:healing/controller/user_home_controller.dart';
+import 'package:healing/controller/usercontroller/explore_all_controller.dart';
+import 'custom_calendar_picker.dart';
 
 class ExploreAllHeader extends StatelessWidget {
-  final UserHomeController controller;
+  final ExploreAllController controller;
   const ExploreAllHeader({super.key, required this.controller});
 
   @override
@@ -30,7 +32,7 @@ class ExploreAllHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          
+
           // Divider Line
           Container(
             width: 40,
@@ -41,18 +43,19 @@ class ExploreAllHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          
-          const Text(
-            '8 centres available.\nFind your perfect healing retreat',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.italic,
-              color: ColorConstant.greyColor,
-              height: 1.3,
+
+          if (controller.uniqueCentres.isNotEmpty)
+            Text(
+              '${controller.uniqueCentres.length} centres available.\nFind your perfect healing retreat',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic,
+                color: ColorConstant.greyColor,
+                height: 1.3,
+              ),
             ),
-          ),
           const SizedBox(height: 24),
 
           // Dropdown 1: What brings you here?
@@ -61,18 +64,24 @@ class ExploreAllHeader extends StatelessWidget {
             label: 'What brings you here?',
             value: controller.selectedReason,
             hint: 'e.g. Panchakarma, Yoga, Stress Relief...',
-            onTap: () => _showSelectionBottomSheet(
-              context: context,
-              title: 'What brings you here?',
-              options: [
-                'Stress Relief Program',
-                'Yoga & Meditation',
-                'Panchakarma',
-                'Detox & Weight Loss',
-              ],
-              selectedValue: controller.selectedReason,
-              onSelect: (val) => controller.updateReason(val),
-            ),
+            onTap: () {
+              List options = [];
+              options = [
+                ...controller.packagesList.map(
+                  (pkg) => pkg.name ?? pkg.title ?? '',
+                ),
+                ...controller.packagesList
+                    .expand((pkg) => pkg.services ?? [])
+                    .map((service) => service.name ?? service.title ?? ''),
+              ].where((name) => name.isNotEmpty).toList();
+              _showSelectionBottomSheet(
+                context: context,
+                title: 'What brings you here?',
+                options: options,
+                selectedValue: controller.selectedReason,
+                onSelect: (val) => controller.updateReason(val),
+              );
+            },
           ),
           const SizedBox(height: 16),
 
@@ -82,18 +91,31 @@ class ExploreAllHeader extends StatelessWidget {
             label: 'Destination',
             value: controller.selectedDestination,
             hint: 'Search city or region...',
-            onTap: () => _showSelectionBottomSheet(
-              context: context,
-              title: 'Destination',
-              options: [
-                'Kerala, India',
-                'Rishikesh, India',
-                'Goa, India',
-                'Bali, Indonesia',
-              ],
-              selectedValue: controller.selectedDestination,
-              onSelect: (val) => controller.updateDestination(val),
-            ),
+            onTap: () {
+              List options = [];
+              options = controller.packagesList
+                  .map((pkg) {
+                    final city = pkg.center?.location?.city?.trim() ?? '';
+                    final state = pkg.center?.location?.state?.trim() ?? '';
+
+                    if (city.isEmpty && state.isEmpty) return '';
+
+                    if (city.isEmpty) return state;
+                    if (state.isEmpty) return city;
+
+                    return '$city, $state';
+                  })
+                  .where((name) => name.isNotEmpty)
+                  .toSet()
+                  .toList();
+              _showSelectionBottomSheet(
+                context: context,
+                title: 'Destination',
+                options: options,
+                selectedValue: controller.selectedDestination,
+                onSelect: (val) => controller.updateDestination(val),
+              );
+            },
           ),
           const SizedBox(height: 16),
 
@@ -103,33 +125,26 @@ class ExploreAllHeader extends StatelessWidget {
             label: 'When are you going?',
             value: controller.selectedWhen,
             hint: 'Select Dates',
-            onTap: () => _showSelectionBottomSheet(
-              context: context,
-              title: 'When are you going?',
-              options: [
-                'Select Dates',
-                'Available next week',
-                'Available next month',
-                'Anytime',
-              ],
-              selectedValue: controller.selectedWhen,
-              onSelect: (val) => controller.updateWhen(val),
-            ),
+            onTap: () => _showCalendarBottomSheet(context),
           ),
           const SizedBox(height: 24),
 
           // Search Button
           ElevatedButton.icon(
             onPressed: () {
-              // Trigger search filter refresh/feedback
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Searching for ${controller.selectedReason} in ${controller.selectedDestination}...',
-                  ),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
+              if (controller.selectedReason.isEmpty ||
+                  controller.selectedDestination.isEmpty ||
+                  controller.selectedWhen.isEmpty) {
+                showToastMessage(
+                  titleMessage: 'Error',
+                  message: 'Please select any program',
+                  context: context,
+                  isError: true,
+                );
+                return;
+              }
+
+              controller.triggerSearch();
             },
             icon: const Icon(
               Icons.search_rounded,
@@ -229,12 +244,13 @@ class ExploreAllHeader extends StatelessWidget {
   void _showSelectionBottomSheet({
     required BuildContext context,
     required String title,
-    required List<String> options,
+    required List options,
     required String selectedValue,
     required ValueChanged<String> onSelect,
   }) {
     showModalBottomSheet(
       context: context,
+      useRootNavigator: true, // Shows over the bottom navigation bar
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -256,27 +272,79 @@ class ExploreAllHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              ...options.map((option) {
-                final bool isSelected = option == selectedValue;
-                return ListTile(
-                  title: Text(
-                    option,
-                    style: TextStyle(
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? ColorConstant.appColor : ColorConstant.lightBlackColor,
-                    ),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      if (options.isEmpty)
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 20.0,
+                            horizontal: 12.0,
+                          ),
+                          child: Text(
+                            'no program found',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: ColorConstant.greyColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        )
+                      else
+                        ...options.map((option) {
+                          final bool isSelected = option == selectedValue;
+                          return ListTile(
+                            title: Text(
+                              option,
+                              style: TextStyle(
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                color: isSelected
+                                    ? ColorConstant.appColor
+                                    : ColorConstant.lightBlackColor,
+                              ),
+                            ),
+                            trailing: isSelected
+                                ? const Icon(
+                                    Icons.check_rounded,
+                                    color: ColorConstant.appColor,
+                                  )
+                                : null,
+                            onTap: () {
+                              onSelect(option);
+                              Navigator.pop(context);
+                            },
+                          );
+                        }),
+                    ],
                   ),
-                  trailing: isSelected
-                      ? const Icon(Icons.check_rounded, color: ColorConstant.appColor)
-                      : null,
-                  onTap: () {
-                    onSelect(option);
-                    Navigator.pop(context);
-                  },
-                );
-              }),
+                ),
+              ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  void _showCalendarBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return CustomCalendarPicker(
+          initialSingleDate: controller.selectedSingleDate,
+          initialStartDate: controller.selectedStartDate,
+          initialEndDate: controller.selectedEndDate,
+          isRangeMode: controller.selectedDateIsRange,
+          onApply: (singleDate, startDate, endDate, isRange) {
+            controller.updateDates(singleDate, startDate, endDate, isRange);
+          },
         );
       },
     );

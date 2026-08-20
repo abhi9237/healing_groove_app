@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/color_constant/color_constant.dart';
-import 'package:healing/controller/my_journey_detail_controller.dart';
+import 'package:healing/controller/usercontroller/my_journey_detail_controller.dart';
 
 class MyJourneyDetailPricing extends StatelessWidget {
   final MyJourneyDetailController controller;

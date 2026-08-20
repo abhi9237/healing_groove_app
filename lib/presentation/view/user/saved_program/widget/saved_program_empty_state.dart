@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:healing/controller/user_bottom_nav_controller.dart';
+import 'package:healing/controller/usercontroller/user_bottom_nav_controller.dart';
 import 'package:healing/core/color_constant/color_constant.dart';
 import 'package:healing/core/route/route_constant/route_constant.dart';
 

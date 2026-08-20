@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:healing/common/app_loader.dart';
 import 'package:healing/common/common_auth_background.dart';
 import '../../../common/account_progress_bar.dart';
-import '../../../controller/create_account_controller.dart';
+import '../../../controller/usercontroller/create_account_controller.dart';
 import 'widget/verify_otp_form.dart';
 import 'widget/verify_otp_header.dart';
 

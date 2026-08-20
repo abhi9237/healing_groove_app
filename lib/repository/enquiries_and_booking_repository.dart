@@ -10,13 +10,40 @@ class EnquiriesAndBookingRepository {
   final ApiCall _apiCall = ApiCall();
 
   Future<Response> getEnquiriesAndBooking({int page = 1, int limit = 10}) async {
-    log('AuthRepository: Endpoint is ${ApiConstant.getEnquiriesAndBookings}');
+    log('AuthRepository: Endpoint is ${ApiConstant.getEnquiriesService}');
 
     try {
       final response = await _apiCall.getRequest(
-        endPoint: ApiConstant.getEnquiriesAndBookings,
+        endPoint: ApiConstant.getEnquiriesService,
         token: HiveStorageService.getUserToken(),
         queryParameters: {
+          'page': page,
+          'limit': limit,
+        },
+      );
+
+      log(
+        'AuthRepository: Logout API call returned with status code: ${response.statusCode}',
+      );
+      log('AuthRepository: Response data: ${response.data}');
+      return response;
+    } catch (error) {
+      log('AuthRepository: Logout API call failed with error: $error');
+      rethrow;
+    }
+  }
+
+
+  Future<Response> searchEnquiriesAndBooking({String? q, String? status,int page = 1, int limit = 10}) async {
+    log('AuthRepository: Endpoint is ${ApiConstant.searchEnquiriesService}');
+
+    try {
+      final response = await _apiCall.getRequest(
+        endPoint: ApiConstant.searchEnquiriesService,
+        token: HiveStorageService.getUserToken(),
+        queryParameters: {
+          'q':q,
+          'status':status,
           'page': page,
           'limit': limit,
         },

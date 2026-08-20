@@ -35,7 +35,7 @@ class RememberMeWidget extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 5),
+            const SizedBox(width: 3),
 
             Text(
               'Remember me',
